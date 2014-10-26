@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Rift Roulette</title>
+    <link href="static/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="static/css/rift.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="navbar navbar-inverse navbar-static-top" role="navigation">
+      <div class="container">
+
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Rift Roulette</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="container content" ng-app="Diablo" ng-controller="rouletteCtrl">
+        <div class="row">
+            <div class="btn-group">
+                <label class="btn btn-primary" ng-model="season" btn-radio="false">Non-seasonal</label>
+                <label class="btn btn-primary" ng-model="season" btn-radio="true">Seasonal</label>
+            </div>
+            <div class="btn-group">
+                <label class="btn btn-primary" ng-model="hardcore" btn-radio="false">Softcore</label>
+                <label class="btn btn-primary" ng-model="hardcore" btn-radio="true">Hardcore</label>
+            </div>
+            <button class="btn btn-primary" ng-click="roulette()">Select Random Party</button>
+        </div>
+        <div class="row">
+            <div class="col-sm-3">
+                <div ng-show="player1">
+                    <h3>{{player1.battleTag}}</h3>
+                    <button class="btn btn-danger btn-block" ng-click="clearProfile(1)">Clear</button>
+                    <div ng-repeat="hero in player1.heroes | filter:heroFilter">
+                        <h4>{{hero.name}}</h4>
+                        <p>Level {{hero.level}} {{hero.class}}</p>
+                    </div>
+                </div>
+                <div ng-show="!player1">
+                    <input class="form-control battletag" placeholder="Username#1234" ng-model="tag1"/>
+                    <button class="btn btn-primary btn-block" type="button" ng-click="lookupPlayer(tag1, 1)">Add Player</button>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div ng-show="player2">
+                    <h3>{{player2.battleTag}}</h3>
+                    <button class="btn btn-danger btn-block" ng-click="clearProfile(2)">Clear</button>
+                    <div ng-repeat="hero in player2.heroes | filter:heroFilter"">
+                        <h4>{{hero.name}}</h4>
+                        <p>Level {{hero.level}} {{hero.class}}</p>
+                    </div>
+                </div>
+                <div ng-show="!player2">
+                    <input class="form-control battletag" placeholder="Username#1234" ng-model="tag2"/>
+                    <button class="btn btn-primary btn-block" type="button" ng-click="lookupPlayer(tag2, 2)">Add Player</button>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div ng-show="player3">
+                    <h3>{{player3.battleTag}}</h3>
+                    <button class="btn btn-danger btn-block" ng-click="clearProfile(3)">Clear</button>
+                    <div ng-repeat="hero in player3.heroes | filter:heroFilter"">
+                        <h4>{{hero.name}}</h4>
+                        <p>Level {{hero.level}} {{hero.class}}</p>
+                    </div>
+                </div>
+                <div ng-show="!player3">
+                    <input class="form-control battletag" placeholder="Username#1234" ng-model="tag3"/>
+                    <button class="btn btn-primary btn-block" type="button" ng-click="lookupPlayer(tag3, 3)">Add Player</button>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div ng-show="player4">
+                    <h4>{{player4.battleTag}}</h4>
+                    <button class="btn btn-danger btn-block" ng-click="clearProfile(4)">Clear</button>
+                    <div ng-repeat="hero in player4.heroes | filter:heroFilter"">
+                        <h4>{{hero.name}}</h4>
+                        <p>Level {{hero.level}} {{hero.class}}</p>
+                    </div>
+                </div>
+                <div ng-show="!player4">
+                    <input class="form-control battletag" placeholder="Username#1234" ng-model="tag4"/>
+                    <button class="btn btn-primary btn-block" type="button" ng-click="lookupPlayer(tag4, 4)">Add Player</button>
+                </div>
+            </div>
+        </div>
+        <div class="row" ng-show="party">
+            <h2>Selected Party</h2>
+            <div class="col-sm-3">
+                <div ng-show="party.player1">
+                    <h4>{{party.player1.name}}</h4>
+                    <p>Level {{party.player1.level}} {{party.player1.class}}</p>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div ng-show="party.player2">
+                    <h4>{{party.player2.name}}</h4>
+                    <p>Level {{party.player2.level}} {{party.player2.class}}</p>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div ng-show="party.player3">
+                    <h4>{{party.player3.name}}</h4>
+                    <p>Level {{party.player3.level}} {{party.player3.class}}</p>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div ng-show="party.player4">
+                    <h4>{{party.player4.name}}</h4>
+                    <p>Level {{party.player4.level}} {{party.player4.class}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="static/lib/jquery/dist/jquery.min.js"></script>
+    <script src="static/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="static/lib/angular/angular.min.js"></script>
+    <script src="static/lib/localforage/dist/localforage.min.js"></script>
+    <script src="static/lib/angular-localforage/dist/angular-localForage.min.js"></script>
+    <script src="static/lib/angular-bootstrap/ui-bootstrap.min.js"></script>
+    <script src="static/lib/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+    <script src="static/js/app.js"></script>
+    <script src="static/js/controllers.js"></script>
+    <script src="static/js/services.js"></script>
+</body>
+
+</html>
