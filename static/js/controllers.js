@@ -3,7 +3,7 @@
 var DiabloControllers = angular.module('DiabloControllers', []);
 
 DiabloControllers.controller('rouletteCtrl', ['$scope', '$localForage', 'API',
-	function($scope, $localForage, API) {
+    function($scope, $localForage, API) {
         $scope.season = false;
         $scope.hardcore = false;
 
@@ -39,7 +39,6 @@ DiabloControllers.controller('rouletteCtrl', ['$scope', '$localForage', 'API',
         $scope.lookupPlayer = function(battletag, player) {
             var name = battletag.replace("#", "-");
             API.profile(name).then(function(d) {
-                console.log(d);
                 if (player === 1) {
                     $localForage.setItem('player1', d.data);
                     $scope.player1 = d.data;
@@ -69,7 +68,7 @@ DiabloControllers.controller('rouletteCtrl', ['$scope', '$localForage', 'API',
                     party.player1 = null;
                 }
             }
-            if ($scope.player1) {
+            if ($scope.player2) {
                 var filtered = $scope.player2.heroes.filter($scope.heroFilter);
                 if (filtered.length > 0) {
                     party.player2 = filtered[Math.floor(Math.random() * filtered.length)];
@@ -95,5 +94,5 @@ DiabloControllers.controller('rouletteCtrl', ['$scope', '$localForage', 'API',
             }
             $scope.party = party;
         }
-	}
+    }
 ]);
