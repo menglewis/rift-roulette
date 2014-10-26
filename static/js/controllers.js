@@ -40,17 +40,37 @@ DiabloControllers.controller('rouletteCtrl', ['$scope', '$localForage', 'API',
             var name = battletag.replace("#", "-");
             API.profile(name).then(function(d) {
                 if (player === 1) {
-                    $localForage.setItem('player1', d.data);
-                    $scope.player1 = d.data;
+                    if (d.data.code === "NOTFOUND") {
+                        $scope.error1 = "That Battletag was not found.";
+                    } else {
+                        $scope.error1 = null;
+                        $localForage.setItem('player1', d.data);
+                        $scope.player1 = d.data;
+                    }
                 } else if (player === 2) {
-                    $localForage.setItem('player2', d.data);
-                    $scope.player2 = d.data;
+                    if (d.data.code === "NOTFOUND") {
+                        $scope.error2 = "That Battletag was not found.";
+                    } else {
+                        $scope.error2 = null;
+                        $localForage.setItem('player2', d.data);
+                        $scope.player2 = d.data;
+                    }
                 } else if (player === 3) {
-                    $localForage.setItem('player3', d.data);
-                    $scope.player3 = d.data;
+                    if (d.data.code === "NOTFOUND") {
+                        $scope.error3 = "That Battletag was not found.";
+                    } else {
+                        $scope.error3 = null;
+                        $localForage.setItem('player3', d.data);
+                        $scope.player3 = d.data;
+                    }
                 } else if (player === 4) {
-                    $localForage.setItem('player4', d.data);
-                    $scope.player4 = d.data;
+                    if (d.data.code === "NOTFOUND") {
+                        $scope.error4 = "That Battletag was not found.";
+                    } else {
+                        $scope.error4 = null;
+                        $localForage.setItem('player4', d.data);
+                        $scope.player4 = d.data;
+                    }
                 }
             });
         };

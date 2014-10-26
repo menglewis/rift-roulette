@@ -43,7 +43,8 @@
                     </div>
                 </div>
                 <div ng-show="!player1">
-                    <input class="form-control battletag" placeholder="Username#1234" ng-model="tag1"/>
+                    <input class="form-control battletag" placeholder="Username#1234" ng-model="tag1" ng-enter="lookupPlayer(tag1, 1)"/>
+                    <p class="error">{{error1}}</p>
                     <button class="btn btn-primary btn-block" type="button" ng-click="lookupPlayer(tag1, 1)">Add Player</button>
                 </div>
             </div>
@@ -51,13 +52,14 @@
                 <div ng-show="player2">
                     <h3>{{player2.battleTag}}</h3>
                     <button class="btn btn-danger btn-block" ng-click="clearProfile(2)">Clear</button>
-                    <div ng-repeat="hero in player2.heroes | filter:heroFilter"">
+                    <div ng-repeat="hero in player2.heroes | filter:heroFilter">
                         <h4>{{hero.name}}</h4>
                         <p>Level {{hero.level}} {{hero.class}}</p>
                     </div>
                 </div>
                 <div ng-show="!player2">
-                    <input class="form-control battletag" placeholder="Username#1234" ng-model="tag2"/>
+                    <input class="form-control battletag" placeholder="Username#1234" ng-model="tag2" ng-enter="lookupPlayer(tag2, 2)"/>
+                    <p class="error">{{error2}}</p>
                     <button class="btn btn-primary btn-block" type="button" ng-click="lookupPlayer(tag2, 2)">Add Player</button>
                 </div>
             </div>
@@ -65,27 +67,29 @@
                 <div ng-show="player3">
                     <h3>{{player3.battleTag}}</h3>
                     <button class="btn btn-danger btn-block" ng-click="clearProfile(3)">Clear</button>
-                    <div ng-repeat="hero in player3.heroes | filter:heroFilter"">
+                    <div ng-repeat="hero in player3.heroes | filter:heroFilter">
                         <h4>{{hero.name}}</h4>
                         <p>Level {{hero.level}} {{hero.class}}</p>
                     </div>
                 </div>
                 <div ng-show="!player3">
-                    <input class="form-control battletag" placeholder="Username#1234" ng-model="tag3"/>
+                    <input class="form-control battletag" placeholder="Username#1234" ng-model="tag3" ng-enter="lookupPlayer(tag3, 3)"/>
+                    <p class="error">{{error3}}</p>
                     <button class="btn btn-primary btn-block" type="button" ng-click="lookupPlayer(tag3, 3)">Add Player</button>
                 </div>
             </div>
             <div class="col-sm-3">
                 <div ng-show="player4">
-                    <h4>{{player4.battleTag}}</h4>
+                    <h3>{{player4.battleTag}}</h3>
                     <button class="btn btn-danger btn-block" ng-click="clearProfile(4)">Clear</button>
-                    <div ng-repeat="hero in player4.heroes | filter:heroFilter"">
+                    <div ng-repeat="hero in player4.heroes | filter:heroFilter">
                         <h4>{{hero.name}}</h4>
                         <p>Level {{hero.level}} {{hero.class}}</p>
                     </div>
                 </div>
                 <div ng-show="!player4">
-                    <input class="form-control battletag" placeholder="Username#1234" ng-model="tag4"/>
+                    <input class="form-control battletag" placeholder="Username#1234" ng-model="tag4" ng-enter="lookupPlayer(tag4, 4)"/>
+                    <p class="error">{{error4}}</p>
                     <button class="btn btn-primary btn-block" type="button" ng-click="lookupPlayer(tag4, 4)">Add Player</button>
                 </div>
             </div>
@@ -128,6 +132,7 @@
     <script src="static/js/app.js"></script>
     <script src="static/js/controllers.js"></script>
     <script src="static/js/services.js"></script>
+    <script src="static/js/directives.js"></script>
 </body>
 
 </html>
